@@ -20,6 +20,13 @@ public class Person {
 	public Person() {
 		
 	}
+	
+	public Person(String userName, String firstName, String lastName, Date birthDate) {
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+	}
 
 	public Long getId() {
 		return id;
