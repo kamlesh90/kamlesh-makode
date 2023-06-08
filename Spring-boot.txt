@@ -1,0 +1,75 @@
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+In a Spring Boot application, the spring-boot-starter-validation dependency allows you to easily perform validation on input data.
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
+With the springfox-boot-starter dependency, you can generate comprehensive API documentation for your Spring Boot application.
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+The Modelmapper library is the java-based mapping framework that simplifies the process of mapping objects between different data 
+modles/structures
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+Jwt is a compact and self-contained way of transmitting information between parties as a JSON Object, typically used for authentication 
+and authorization purposes. 
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+*************************************************************************************************************************************
+findBy, findAllBy, findFirst, findTop
+
+List<Player> findByScoreGreaterThan(Integer target);
+
+Spring Data JPA parses the method name syntax into SQL statements to derive queries. Let's look at what each keyword does:
+
+> find is translated to a select statement.
+> By is parsed to a where clause.
+> Score is the table column name and should be the same name defined in the Player class.
+> GreaterThan adds the > operator in the query to compare the score field with the target method argument.
+
+findBy and findAllBy both are producing the same result only difference in naming convention 
+
+findFirst and findTop is for returning single result here also both producing the same result only difference in naming convention
+
+***********************************************************************************************************************************
+	 @Query("select p from Post p where p.title like :key")
+	 List<Post> findByTitleContaining(@Param("key") String title);
+
+@Param("key") is an annotation used to bind the :key parameter in the query to the title parameter of the method. It ensures that the 
+provided value for title is used as the value for the :key parameter in the query.
+
+***************************************************************************************************************************************
+Why is ResponseEntity used?
+
+ResponseEntity represents the entire HTTP response. You have more control over response by including body, headers and status code.
+
+As a good programming practice, it's always required that server response should contain accurate headers and status code. Without 
+ResponseEntity, you can control the response body but it will be hard to control the headers and status code.
+
+When to use ResponseEntity?
+ResponseEntity is used when you need to change HTTP headers or HTTP status code based upon your business logic or incoming request. 
+ResponseEntity wraps the original object as its body which is optional. 
+
+If you want to return an object or null, ResponseEntity will work in either way. For null objects, you may have to set the HTTP status 
+like not found or no content. ResponseEntity provides the flexibility to dynamically set HTTP headers as well as custom HTTP headers.
+
+What is RequestEntity in Spring?
+RequestEntity is an extension of HttpEntity that exposes the information of HTTP method and uri. RequestEntity is used in the 
+RestTemplate to prepare outgoing requests and in @Controller methods as request input.
+
