@@ -25,13 +25,17 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = modelMapper.map(categoryDto, Category.class);
         Category addedCategory = categoryRepo.save(category);
         CategoryDto addedCategoryDto = modelMapper.map(addedCategory, CategoryDto.class);
+        addedCategoryDto.setCategoryId(addedCategory.getCategoryId());
         return addedCategoryDto;
     }
 
     @Override
     public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
-        CategoryDto ctgDto = getCategory(categoryDto.getCategoryId());
-        CategoryDto updatedCtg = createCategory(ctgDto);
+        CategoryDto ctg = getCategory(categoryId);
+        ctg.setCategoryId(categoryDto.getCategoryId());
+        ctg.setCategoryTittle(categoryDto.getCategoryTittle());
+        ctg.setCategoryDescription(categoryDto.getCategoryDescription());
+        CategoryDto updatedCtg = createCategory(ctg);
         return updatedCtg;
     }
 
@@ -55,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryDto> ctgDtoList = ctgList.stream().map(c ->  mapToDto(c)).toList();
         return ctgDtoList;
     }
-    private CategoryDto mapToDto(Category c) {
+     CategoryDto mapToDto(Category c) {
         CategoryDto ctgDto = modelMapper.map(c,CategoryDto.class);
         return  ctgDto;
     }

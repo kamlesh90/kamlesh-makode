@@ -2,6 +2,7 @@ package com.blog.apis.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Setter
 @Getter
+@NoArgsConstructor
 public class CategoryDto {
     private Integer categoryId;
     @NotBlank
